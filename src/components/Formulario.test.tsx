@@ -1,24 +1,99 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Formulario from './Formulario';
+import { RecoilRoot } from 'recoil';
 
 // Vamos utilizar uma função chamada "test" da biblioteca Jest
 
 test('quando o input está vazio, novos participantes não podem ser adicionados', () => {
-
-  // Passos:
   // Para começar a seguir o passo a passo será preciso renderizar o componente
-  render(<Formulario />)
+  render(
+    <RecoilRoot>
+      <Formulario />
+    </RecoilRoot>
+  )
 
-  // Primeiro -> encontrar no DOM o input
+  // Primeiro -> Encontrar no DOM o input
   const input = screen.getByPlaceholderText('Insira os nomes dos participantes')
 
-  // Segundo -> encontrar o botão
+  // Segundo -> Encontrar o botão
   const botao = screen.getByRole('button')
 
-  // Terceiro -> garantir que o input esteja no documento
+  // Terceiro -> Garantir que o input esteja no documento
   expect(input).toBeInTheDocument()
 
-  // Quarto -> garantir que o botão esteja desabilitado
+  // Quarto -> Garantir que o botão esteja desabilitado
   expect(botao).toBeDisabled()
+})
+
+test('adicionar um participante caso exista um nome preenchido', () => {
+  // Para começar a seguir o passo a passo será preciso renderizar o componente
+  render(
+    <RecoilRoot>
+      <Formulario />
+    </RecoilRoot>
+  )
+
+  // Primeiro -> Encontrar no DOM o input
+  const input = screen.getByPlaceholderText('Insira os nomes dos participantes')
+
+  // Segundo -> Encontrar o botão
+  const botao = screen.getByRole('button')
+
+  // Terceiro -> Inserir um valor no input
+  fireEvent.change(input, {
+    target: {
+      value: 'Ana Catarina'
+    }
+  })
+
+  // Quarto -> Clicar no botão de submeter
+  fireEvent.click(botao)
+
+  // Quinto -> Garantir que o input esteja com o foco ativo
+  expect(input).toHaveFocus()
+
+  // Sexto -> Garantir que o input não tenha um valor
+  expect(input).toHaveValue("")
+})
+
+test('nomes duplicados não podem ser adicionados na lista', () => {
+   // Para começar a seguir o passo a passo será preciso renderizar o componente
+  render(
+    <RecoilRoot>
+      <Formulario />
+    </RecoilRoot>
+  )
+
+  // Primeiro -> Encontrar no DOM o input
+  const input = screen.getByPlaceholderText('Insira os nomes dos participantes')
+
+  // Segundo -> Encontrar o botão
+  const botao = screen.getByRole('button')
+
+  // Terceiro -> Inserir um valor no input
+  fireEvent.change(input, {
+    target: {
+      value: 'Ana Catarina'
+    }
+  })
+
+  // Quarto -> Clicar no botão de submeter
+  fireEvent.click(botao)
+
+  // Quinto -> Inserir novamente o mesmo valor no input
+  fireEvent.change(input, {
+    target: {
+      value: 'Ana Catarina'
+    }
+  })
+
+  // Sexto -> Clicar novamente no botão de submeter
+  fireEvent.click(botao)
+
+  // Setimo -> Espera-se que haja uma mensagem de erro na tela
+  const mensagemDeErro = screen.getByRole('alert')
+
+  //Oitavo -> Verificar se a mensagem de erro está correta para o erro que está sendo tratado
+  expect(mensagemDeErro.textContent).toBe('Nomes duplicados não são permitidos')
 })
