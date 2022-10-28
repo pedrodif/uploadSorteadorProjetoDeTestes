@@ -2,8 +2,8 @@
 import { FormEvent, useRef, useState } from "react";
 
 // Hooks
-import { useAdicionarParticipante } from "../state/hooks/useAdicionarParticipante";
 import { useMensagemDeErro } from "../state/hooks/useMensagemDeErro";
+import { useAdicionarParticipante } from "../state/hooks/useAdicionarParticipante";
 
 const Formulario = () => {
   // State
@@ -39,7 +39,7 @@ const Formulario = () => {
       >
         Adicionar
       </button>
-      {mensagemDeErro && <p role="alert">mensagemDeErro</p>}
+      {mensagemDeErro && <p role="alert">{mensagemDeErro}</p>}
     </form>
   )
 }
