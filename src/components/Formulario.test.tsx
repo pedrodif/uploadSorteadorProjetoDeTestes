@@ -1,7 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import Formulario from './Formulario';
 import { RecoilRoot } from 'recoil';
+import Formulario from './Formulario';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 // Vamos utilizar uma função chamada "test" da biblioteca Jest
 
