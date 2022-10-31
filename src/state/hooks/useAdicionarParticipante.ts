@@ -5,7 +5,7 @@ import { erroState, listaParticipantesState } from "../atom"
 export const useAdicionarParticipante = () => {
   const setLista = useSetRecoilState(listaParticipantesState)
   const lista = useRecoilValue(listaParticipantesState)
-  const setErro = useSetRecoilState(erroState)
+  const setErro = useSetRecoilState(erroStates)
   return (nomeDoParticipante: string) => {
     if (lista.includes(nomeDoParticipante)) {
       setErro('Nomes duplicados não são permitidos')
