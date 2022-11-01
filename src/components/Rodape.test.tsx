@@ -80,7 +80,12 @@ describe('quando existem participantes suficientes', () => {
     // Disparar o evento
     fireEvent.click(botao)
 
-    // Validações - Asserções
+    // Validações - Asserções ->
+
+    // Número de vezes chamado
     expect(mockNavegacao).toHaveBeenCalledTimes(1)
+
+    //Verificando se foi chamado com a URL correta
+    expect(mockNavegacao).toHaveBeenCalledWith('/sorteio')
   })
 })
