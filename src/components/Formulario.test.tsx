@@ -1,7 +1,10 @@
+// Packages
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Formulario from './Formulario';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+
+// Components
+import Formulario from './Formulario';
 
 // O metódo describe('', () => {}) pode ser utilizado para agrupar os testes de forma semântica
 describe('comportamento do componente Formulario.tsx', () => {

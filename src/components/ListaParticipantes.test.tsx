@@ -1,7 +1,14 @@
+// Packages
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
+import { render, screen } from '@testing-library/react';
+
+// Components
 import ListaParticipantes from './ListaParticipantes';
+
+// Mock
+jest.mock('', () => {})
+
 describe('Uma lista vazia de participantes' , () => {
   test('deve ser renderizada sem elementos', () => {
     // Renderizar o componente - Arrange
@@ -21,6 +28,7 @@ describe('Uma lista vazia de participantes' , () => {
 
 describe('Uma lista preenchida de participantes' , () => {
   // Criando uma lista ficticia de participantes
+  const participantes = ['Ana', 'Catarina']
 
   test('deve ser renderizada sem elementos', () => {
     // Renderizar o componente - Arrange
@@ -34,6 +42,6 @@ describe('Uma lista preenchida de participantes' , () => {
     const itens = screen.queryAllByRole('listitem')
 
     // Fazer a verificação - Assert
-    expect(itens).toHaveLength(0)
+    expect(itens).toHaveLength(participantes.length)
   })
 })
