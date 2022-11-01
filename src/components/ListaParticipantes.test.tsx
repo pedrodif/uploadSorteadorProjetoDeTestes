@@ -6,10 +6,22 @@ import { render, screen } from '@testing-library/react';
 // Components
 import ListaParticipantes from './ListaParticipantes';
 
+// Hooks
+import { useListaDeParticipantes } from '../state/hooks/useListaDeParticipantes';
+
 // Mock
-jest.mock('', () => {})
+jest.mock('../state/hooks/useListaDeParticipantes', () => {
+  return {
+    useListaDeParticipantes: jest.fn()
+  }
+})
 
 describe('Uma lista vazia de participantes' , () => {
+  // preenchendo o mock - Arrange
+  beforeEach(() => {
+    (useListaDeParticipantes as jest.Mock).mockReturnValue([])
+  })
+
   test('deve ser renderizada sem elementos', () => {
     // Renderizar o componente - Arrange
     render(
@@ -30,7 +42,12 @@ describe('Uma lista preenchida de participantes' , () => {
   // Criando uma lista ficticia de participantes
   const participantes = ['Ana', 'Catarina']
 
-  test('deve ser renderizada sem elementos', () => {
+  // preenchendo o mock - Arrange
+  beforeEach(() => {
+    (useListaDeParticipantes as jest.Mock).mockReturnValue(participantes)
+  })
+
+  test('deve ser renderizada com elementos', () => {
     // Renderizar o componente - Arrange
     render(
       <RecoilRoot>
