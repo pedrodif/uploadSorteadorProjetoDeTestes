@@ -14,7 +14,6 @@ jest.mock('react-router-dom', () => {
   }
 })
 
-
 describe('a pagina de configuração', () => {
 
   test('deve ser renderizada corretamente', () => {
