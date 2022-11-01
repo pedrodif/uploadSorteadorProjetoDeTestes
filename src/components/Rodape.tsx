@@ -1,7 +1,13 @@
+// Hooks
+import { useListaDeParticipantes } from "../state/hooks/useListaDeParticipantes";
+
 const Rodape = () => {
+  const participantes = useListaDeParticipantes();
+  const idDiseabled = participantes.length < 3;
+
   return(
     <footer>
-      <button disabled={true}>Iniciar brincadeira</button>
+      <button disabled={idDiseabled}>Iniciar brincadeira</button>
     </footer>
   )
 }
