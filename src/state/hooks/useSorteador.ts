@@ -1,6 +1,3 @@
-// Packages
-import shuffle from "just-shuffle";
-
 // States
 import { resultadoAmigoSecreto } from "../atom";
 
