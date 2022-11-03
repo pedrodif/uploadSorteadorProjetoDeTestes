@@ -1,22 +1,23 @@
 // Packages
 import shuffle from "just-shuffle";
 
+// States
+import { resultadoAmigoSecreto } from "../atom";
+
 // Hook
+import { useSetRecoilState } from "recoil";
 import { useListaDeParticipantes } from "./useListaDeParticipantes";
+
+// Functions
+import { realizarSorteio } from "../helpers/realizarSorteio";
 
 export const useSorteador = () => {
 
   const participantes = useListaDeParticipantes();
+  const setResultado = useSetRecoilState(resultadoAmigoSecreto)
 
   return () => {
-    const totalDeParticipantes = participantes.length;
-
-    const embaralhado = shuffle(participantes)
-
-    for (let index = 0; index < totalDeParticipantes; index++) {
-
-      const indiceDoAmigo = index === (totalDeParticipantes - 1) ? 0 : index + 1;
-
-    }
+    const resultado = realizarSorteio(participantes)
+    setResultado(resultado)
   }
 }
